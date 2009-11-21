@@ -33,3 +33,20 @@ Store.prototype.add = function(tiddler) {
 	}
 	this.linkmap[tiddler.title].push(tiddler.id);
 };
+
+Store.prototype.remove = function(id) {
+	var i = this.index[id];
+	if(i === undefined) {
+		return false;
+	}
+	var title = this[i].title;
+	delete this.index[id];
+	delete this.linkmap[title];
+	var tiddler = this.splice(i, 1)[0];
+	for(var key in this.index) { // update index references -- XXX: inefficient!?
+		if(this.index[key] > i) {
+			this.index[key]--;
+		}
+	}
+	return tiddler;
+};
