@@ -15,13 +15,14 @@ var Store = function(tiddlers) {
 	tiddlers = tiddlers || [];
 	this.index = {};
 	this.linkmap = {}; // XXX: rename?
-	for(i = 0; i < tiddlers.length; i++) {
+	for(var i = 0; i < tiddlers.length; i++) {
 		this.add(tiddlers[i]);
 	}
+	this.length = tiddlers.length; // pseudo-array
 };
 
 Store.prototype.push = Array.prototype.push;
-Store.prototype.splice = Array.prototype.splice; // makes Firebug treat object as array
+Store.prototype.splice = Array.prototype.splice;
 
 Store.prototype.add = function(tiddler) {
 	this.push(tiddler);
