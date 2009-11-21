@@ -49,3 +49,16 @@ Store.prototype.remove = function(id) {
 	}
 	return tiddler;
 };
+
+// XXX: experimental
+Store.prototype.filter = function(field, value, invert) {
+	if(invert) {
+		var check = function(a, b) { return a !== b; };
+	} else {
+		check = function(a, b) { return a === b; };
+	}
+	var matches = jQuery.map(this, function(tiddler, i) { // XXX: use Array.filter to avoid dependency
+		return check(tiddler[field], value) ? tiddler : null;
+	});
+	return new Store(matches);
+};
