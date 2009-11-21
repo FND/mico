@@ -3,7 +3,7 @@
  */
 
 var Tiddler = function(title) {
-	this.id = new Date() * new Date(); // TODO: proper UUID
+	this.id = generateID();
 	this.title = title;
 };
 
