@@ -21,8 +21,7 @@ var Store = function(tiddlers) {
 	this.length = tiddlers.length; // pseudo-array
 };
 
-Store.prototype.push = Array.prototype.push;
-Store.prototype.splice = Array.prototype.splice;
+Store.prototype = new Array();
 
 Store.prototype.add = function(tiddler) {
 	this.push(tiddler);
