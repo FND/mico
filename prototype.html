@@ -3,7 +3,7 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>tiddler collections</title>
+	<title>collections of micro-content</title>
 	<style type="text/css">
 		* {
 			margin: 0;
@@ -19,15 +19,15 @@
 	<script type="text/javascript">
 		/* XXX: DEBUG */
 
-		var tiddlers = [
-			new Tiddler("Foo"),
-			new Tiddler("Bar")
+		var micos = [
+			new Mico("Foo"),
+			new Mico("Bar")
 		];
 
-		store = new Store(tiddlers);
+		store = new Collection(micos);
 		console.log(store);
 
-		store.add(new Tiddler("Baz"));
+		store.add(new Mico("Baz"));
 		console.log(store);
 	</script>
 </body>
