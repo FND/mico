@@ -1,17 +1,22 @@
+(function() {
+
+var ns = micopad;
+
 /*
  * unit of micro-content
  */
 
-var Mico = function(title) {
-	this.id = generateID();
+ns.Mico = function(title) {
+	this.id = ns.util.generateID();
 	this.title = title;
+	// TODO: add body and tags as part of the standard attributes?
 };
 
 /*
  * collection of MicoS
  */
 
-var Collection = function(micos) {
+ns.Collection = function(micos) {
 	micos = micos || [];
 	this.index = {};
 	this.linkmap = {}; // XXX: rename?
@@ -21,9 +26,9 @@ var Collection = function(micos) {
 	this.length = micos.length; // pseudo-array
 };
 
-Collection.prototype = new Array();
+ns.Collection.prototype = new Array();
 
-Collection.prototype.add = function(mico) {
+ns.Collection.prototype.add = function(mico) {
 	this.push(mico);
 	this.index[mico.id] = this.length - 1;
 	if(this.linkmap[mico.title] === undefined) {
@@ -32,7 +37,7 @@ Collection.prototype.add = function(mico) {
 	this.linkmap[mico.title].push(mico.id);
 };
 
-Collection.prototype.remove = function(id) {
+ns.Collection.prototype.remove = function(id) {
 	var i = this.index[id];
 	if(i === undefined) {
 		return false;
@@ -49,8 +54,7 @@ Collection.prototype.remove = function(id) {
 	return mico;
 };
 
-// XXX: experimental
-Collection.prototype.filter = function(field, value, invert) {
+ns.Collection.prototype.filter = function(field, value, invert) {
 	if(invert) {
 		var check = function(a, b) { return a !== b; };
 	} else {
@@ -59,5 +63,7 @@ Collection.prototype.filter = function(field, value, invert) {
 	var matches = jQuery.map(this, function(mico, i) { // XXX: use Array.filter to avoid dependency
 		return check(mico[field], value) ? mico : null;
 	});
-	return new Collection(matches);
+	return new ns.Collection(matches);
 };
+
+})();
