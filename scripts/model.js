@@ -13,8 +13,11 @@ var Tiddler = function(title) {
 
 var Store = function(tiddlers) {
 	tiddlers = tiddlers || [];
+	this.index = {};
+	this.linkmap = {}; // XXX: rename?
 	for(i = 0; i < tiddlers.length; i++) {
-		this[i] = tiddlers[i];
+		var tiddler = tiddlers[i];
+		this.add(tiddler);
 	}
 	this.length = tiddlers.length;
 };
@@ -24,4 +27,9 @@ Store.prototype.splice = Array.prototype.splice; // makes Firebug treat object a
 
 Store.prototype.add = function(tiddler) {
 	this.push(tiddler);
+	this.index[tiddler.id] = this.length - 1;
+	if(this.linkmap[tiddler.title] === undefined) {
+		this.linkmap[tiddler.title] = [];
+	}
+	this.linkmap[tiddler.title].push(tiddler.id);
 };
