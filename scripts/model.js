@@ -1,5 +1,5 @@
 /*
- * content items
+ * content item
  */
 
 var Tiddler = function(title) {
@@ -16,10 +16,8 @@ var Store = function(tiddlers) {
 	this.index = {};
 	this.linkmap = {}; // XXX: rename?
 	for(i = 0; i < tiddlers.length; i++) {
-		var tiddler = tiddlers[i];
-		this.add(tiddler);
+		this.add(tiddlers[i]);
 	}
-	this.length = tiddlers.length;
 };
 
 Store.prototype.push = Array.prototype.push;
