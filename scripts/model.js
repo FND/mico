@@ -55,8 +55,10 @@ ns.Collection.prototype.remove = function(id) {
 };
 
 ns.Collection.prototype.filter = function(field, value, invert) {
-	if(invert) {
-		var check = function(a, b) { return a !== b; };
+	if(arguments.length == 1 && typeof arguments[0] == "function") { // XXX: hacky?
+		var check = arguments[0];
+	} else if(invert) {
+		check = function(a, b) { return a !== b; };
 	} else {
 		check = function(a, b) { return a === b; };
 	}
