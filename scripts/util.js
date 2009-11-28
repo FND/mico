@@ -1,6 +1,6 @@
 (function() {
 
-var ns = micopad;
+var ns = mico;
 
 ns.util = {
 	generateID: function() {
