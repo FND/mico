@@ -69,10 +69,17 @@ ns.Collection.prototype.filter = function(field, value, invert) {
 	} else {
 		check = function(a, b) { return a === b; };
 	}
-	var matches = jQuery.map(this, function(mico, i) { // XXX: use Array.filter to avoid dependency
+	var matches = jQuery.map(this, function(mico, i) {
 		return check(mico[field], value) ? mico : null;
 	});
 	return new ns.Collection(matches);
+};
+
+ns.Collection.prototype.setAttr = function(field, value) {
+	for(var i = 0; i < this.length; i++) {
+		this[i][field] = value;
+	};
+	return this;
 };
 
 })();
