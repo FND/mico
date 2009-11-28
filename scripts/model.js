@@ -23,14 +23,19 @@ ns.Collection = function(micos) {
 	this.index = {};
 	this.linkmap = {}; // XXX: rename?
 	for(var i = 0; i < micos.length; i++) {
-		this.add(micos[i]);
+		this.put(micos[i]);
 	}
 	this.length = micos.length; // pseudo-array
 };
 
 ns.Collection.prototype = new Array();
 
-ns.Collection.prototype.add = function(mico) {
+ns.Collection.prototype.get = function(title) {
+	var id = this.linkmap[title];
+	return this[this.index[id]];
+};
+
+ns.Collection.prototype.put = function(mico) {
 	this.push(mico);
 	this.index[mico.id] = this.length - 1;
 	if(this.linkmap[mico.title] === undefined) {
@@ -39,7 +44,7 @@ ns.Collection.prototype.add = function(mico) {
 	this.linkmap[mico.title].push(mico.id);
 };
 
-ns.Collection.prototype.remove = function(id) {
+ns.Collection.prototype.delete = function(id) {
 	var i = this.index[id];
 	if(i === undefined) {
 		return false;
