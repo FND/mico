@@ -8,4 +8,8 @@ ns.util = {
 	}
 };
 
+jQuery.fn.attach = function(html) {
+	return jQuery(html).appendTo(this);
+};
+
 })();
