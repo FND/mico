@@ -6,10 +6,12 @@ var ns = mico;
  * unit of micro-content
  */
 
-ns.Mico = function(title) {
+ns.Mico = function(title, options) {
+	options = options || {};
 	this.id = ns.util.generateID();
 	this.title = title;
-	// TODO: add body and tags as part of the standard attributes?
+	this.type = options.type || "text/plain"; // XXX: custom type?
+	this.body = options.body || null;
 };
 
 /*
